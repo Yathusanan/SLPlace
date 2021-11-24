@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SLPlaceAPI</name>
+    </assembly>
+    <members>
+        <member name="M:SLPlaceAPI.Controllers.PlacesController.GetPalces">
+            <summary>
+            Get List Of Places
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SLPlaceAPI.Controllers.PlacesController.GetPlace(System.Int32)">
+            <summary>
+            Get Individual Place
+            </summary>
+            <param name="placeId"> The Id of a Place</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLPlaceAPI.Controllers.PlacesController.CreatePlace(SLPlaceAPI.Models.Dtos.PlaceDto)">
+            <summary>
+            Create New Place
+            </summary>
+            <param name="placeDto">Properties Of A Specific place</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLPlaceAPI.Controllers.PlacesController.UpdatePlace(System.Int32,SLPlaceAPI.Models.Dtos.PlaceDto)">
+            <summary>
+            Update A specific Place
+            </summary>
+            <param name="placeId">Id of a Place</param>
+            <param name="placeDto">New Properties Of A Specific place</param>
+            <returns></returns>
+        </member>
+        <member name="M:SLPlaceAPI.Controllers.PlacesController.DeletePlace(System.Int32)">
+            <summary>
+            Delete a specific Place
+            </summary>
+            <param name="placeId">Id of a place</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
