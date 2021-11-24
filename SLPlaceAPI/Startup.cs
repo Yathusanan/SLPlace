@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SLPlaceAPI.Data;
+using SLPlaceAPI.Mapping;
 using SLPlaceAPI.Repository;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace SLPlaceAPI
             services.AddDbContext<ApplicationDBContext>(options => 
                                   options.UseSqlServer(Configuration.GetConnectionString("SLPConnection")));
             services.AddScoped<IPlaceRepository, PlaceRespository>();
+            services.AddAutoMapper(typeof(SLPMapper));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
