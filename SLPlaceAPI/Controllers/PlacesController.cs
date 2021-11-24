@@ -39,7 +39,7 @@ namespace SLPlaceAPI.Controllers
             return Ok(placesToReturn);
         }
 
-        [HttpGet("{placeId:int}")]
+        [HttpGet("{placeId:int}", Name = "GetPlace")]
         public async Task<IActionResult> GetPlace(int placeId)
         {
             var placeFromDb = await _repository.GetPlaceAync(placeId);
@@ -50,6 +50,57 @@ namespace SLPlaceAPI.Controllers
             var placeTorReturnDto = _map.Map<PlaceDto>(placeFromDb);
 
             return Ok(placeTorReturnDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreatePlace([FromBody]PlaceDto placeDto)
+        {
+            if (placeDto == null)
+                return BadRequest(ModelState);
+
+            var existPlaceName = await _repository.PlaceNameExistAync(placeDto.Name);
+
+            if (existPlaceName)
+            {
+                ModelState.AddModelError("", "This Place Name Is Already Exist!");
+                return StatusCode(404, ModelState);
+            }
+
+            var place = _map.Map<Place>(placeDto);
+
+            await _repository.AddPlaceAync(place);
+
+            return CreatedAtRoute("GetPlace", new { placeId = place.Id }, place);
+
+        }
+
+        [HttpPatch("{placeId:int}", Name = "UpdatePlace")]
+        public IActionResult UpdatePlace(int placeId, [FromBody]PlaceDto placeDto)
+        {
+            if (placeDto == null || placeId != placeDto.Id)
+                return BadRequest(ModelState);
+
+            var place = _map.Map<Place>(placeDto);
+
+             _repository.UpdatePlace(place);
+
+            return Ok("Place Detail Updated!");
+        }
+
+        [HttpDelete("{placeId:int}", Name = "DeletePlace")]
+        public async Task<IActionResult> DeletePlace(int placeId)
+        {
+            if (placeId == 0)
+                return BadRequest(ModelState);
+
+            var placeFromDb = await _repository.GetPlaceAync(placeId);
+
+            if (placeFromDb == null)
+                return NotFound();
+
+            _repository.DeletePlace(placeFromDb);
+
+            return Ok("Place Deleted!");
         }
     }
 }
