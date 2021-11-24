@@ -8,7 +8,7 @@ namespace SLPlaceAPI.Repository
 {
     public interface IPlaceRepository
     {
-        Task<IList<Place>> GetPlacesAsync();
+        Task<IReadOnlyList<Place>> GetPlacesAsync();
         Task<Place> GetPlaceAync(int id);
         Task AddPlaceAync(Place place);
         Task<bool> PlaceNameExistAync(string name);

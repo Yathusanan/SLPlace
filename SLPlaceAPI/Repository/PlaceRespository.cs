@@ -28,7 +28,7 @@ namespace SLPlaceAPI.Repository
             return await _context.Places.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<IList<Place>> GetPlacesAsync()
+        public async Task<IReadOnlyList<Place>> GetPlacesAsync()
         {
             return await _context.Places.ToListAsync();
         }
